@@ -12,7 +12,7 @@ export default function Home() {
             site generation. The website is designed to be SEO-friendly,
             ensuring that search engines can easily crawl and index the content.
           </p>
-          <Link href="/content" className="btn btn-primary">
+          <Link href="/articles" className="btn btn-primary">
             Example Content
           </Link>
         </div>
