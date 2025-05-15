@@ -50,7 +50,7 @@ export default async function ArticlesPage() {
               />
             )}
             <p>{article.description}</p>
-            <Link href={`/articles/${article.id}`} className="text-accent">
+            <Link href={`/articles/${article.slug}`} className="text-accent">
               Read more
             </Link>
           </li>
