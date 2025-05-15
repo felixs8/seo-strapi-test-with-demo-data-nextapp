@@ -1,8 +1,8 @@
 import Link from "next/link";
-import articlesExampleData from "@/public/example_api_response.json";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic"; // Enable SSR on every request
+// Static generation with ISR: revalidate every 5 minutes
+export const revalidate = 60 * 5; // 5 minutes
 
 async function fetchArticles() {
   console.log("Fetching articles from Strapi...");
@@ -13,7 +13,10 @@ async function fetchArticles() {
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },
-      cache: "no-store", // force server-side rendering
+      // Do NOT include cache: 'no-store' — we want static cache with revalidation
+      next: {
+        revalidate: revalidate,
+      },
     }
   );
 
@@ -31,7 +34,6 @@ async function fetchArticles() {
 
 export default async function ArticlesPage() {
   const articles = await fetchArticles();
-  //const articles = articlesExampleData.data; // Use example data for testing
 
   return (
     <main className="p-6 mx-auto max-w-md md:max-w-lg">
@@ -40,7 +42,7 @@ export default async function ArticlesPage() {
         {articles.map((article: any) => (
           <li key={article.id} className="border p-4 rounded">
             <h2 className="text-xl font-semibold">{article.title}</h2>
-            {article.cover.formats.thumbnail.url && (
+            {article.cover?.formats?.thumbnail?.url && (
               <Image
                 width={article.cover.formats.thumbnail.width}
                 height={article.cover.formats.thumbnail.height}
