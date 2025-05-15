@@ -4,6 +4,10 @@ import { revalidatePath } from "next/cache";
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-revalidate-secret");
 
+  console.log("[REVALIDATE] Received request");
+  console.log(`[REVALIDATE] Secret: ${secret}`);
+  console.log(`[REVALIDATE] env secret: ${process.env.REVALIDATE_SECRET}`);
+
   if (secret !== process.env.REVALIDATE_SECRET) {
     return new Response("Unauthorized", { status: 401 });
   }
