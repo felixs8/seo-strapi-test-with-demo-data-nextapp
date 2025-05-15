@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
     console.warn(
       "[REVALIDATE] No slug found — possibly a test event or malformed payload."
     );
+    console.log(body);
   }
 
   console.log("[REVALIDATE] List: /articles");
