@@ -13,7 +13,7 @@ async function fetchArticleBySlug(slug: string) {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },
       next: {
-        revalidate: 300,
+        revalidate: revalidate,
       },
     }
   );

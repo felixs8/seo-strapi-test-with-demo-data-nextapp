@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Static generation with ISR: revalidate every 5 minutes
-export const revalidate = 60 * 5; // 5 minutes
+export const revalidate = 300; // 5 minutes
 
 async function fetchArticles() {
   console.log("Fetching articles from Strapi...");
