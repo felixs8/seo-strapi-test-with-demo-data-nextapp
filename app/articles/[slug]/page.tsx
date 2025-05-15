@@ -29,11 +29,11 @@ async function fetchArticleBySlug(slug: string) {
 export default async function ArticlePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const paramsReceived = await params;
+  const { slug } = await params;
 
-  const article = await fetchArticleBySlug(paramsReceived.slug);
+  const article = await fetchArticleBySlug(slug);
 
   if (!article) return notFound();
 
